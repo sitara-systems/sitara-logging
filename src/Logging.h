@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MongoController.h"
-#include "loggers/LoggerMongo.h"
+#include "mongodb/MongoController.h"
+#include "mongodb/LoggerMongo.h"
 
 namespace sitara {
     static void createLoggerMongo(std::string applicationName, std::string uri, std::string database, std::string collection) {
