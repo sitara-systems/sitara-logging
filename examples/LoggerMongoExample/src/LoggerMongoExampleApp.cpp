@@ -1,9 +1,10 @@
 #include "cinder/app/App.h"
 #include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
+#include "cinder/Rand.h"
 #include "cinder/Utilities.h"
 #include "jsoncpp/json.h"
-#include "LoggerMongo.h"
+#include "Logging.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -25,7 +26,7 @@ void LoggerMongoExampleApp::setup() {
 	std::string database = mongoEndpoint["database"].asString();;
 	std::string collection = mongoEndpoint["collection"].asString();;
 
-	ci::log::makeLogger<sitara::LoggerMongo>("Sitara Systems Test Logger", uri, database, collection);
+	sitara::createLoggerMongo("Sitara Systems Test Application", uri, database, collection);
 
 	std::cout << "Setup Complete" << std::endl;
 }
@@ -34,8 +35,28 @@ void LoggerMongoExampleApp::mouseDown( MouseEvent event ) {
 }
 
 void LoggerMongoExampleApp::update() {
-	if (ci::app::getElapsedFrames() % 120 == 0) {
-		CI_LOG_I("Test Message");
+	if (ci::app::getElapsedFrames() % 300 == 0) {
+		int random = ci::randInt(0, 6);
+		switch (random) {
+		case 0:
+			CI_LOG_V("This is a verbose message");
+			break;
+		case 1:
+			CI_LOG_D("This is a debug message");
+			break;
+		case 2:
+			CI_LOG_I("This is an informational message");
+			break;
+		case 3:
+			CI_LOG_W("This is a warning message");
+			break;
+		case 4:
+			CI_LOG_E("This is an error message");
+			break;
+		case 5:
+			CI_LOG_F("This is a fatal message");
+			break;
+		}
 	}
 }
 

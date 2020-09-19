@@ -14,3 +14,7 @@ The Logger writes to a mongo database with the following JSON object:
   "message" : "Any custom message with extra information"
 }
 ```
+
+`mongocxx` requires the use of a Singleton `mongocxx::instance` class, and due to `Logger`'s multithreaded nature the block needs to use clients from a `mongocxx::pool`.  This logic is all wrapped into `sitara::MongoController`.
+
+For convenience, all necessary logic to create a new `LoggerMongo` has been wrapped in  `sitara::createLoggerMongo()`, found in `Logger.h`.

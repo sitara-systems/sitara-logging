@@ -21,6 +21,9 @@
     <Filter Include="blocks\sitara-logging\src">
       <UniqueIdentifier>{7b968248-b416-45c9-8c4f-b4343f9a8118}</UniqueIdentifier>
     </Filter>
+    <Filter Include="blocks\sitara-logging\src\loggers">
+      <UniqueIdentifier>{9005be41-a239-4bf8-97e5-516324451e69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\LoggerMongoExampleApp.cpp">
@@ -32,15 +35,21 @@
     <ClInclude Include="..\include\Resources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\..\src\LoggerMongo.cpp">
+    <ClCompile Include="..\..\..\src\loggers\LoggerMongo.cpp">
+      <Filter>blocks\sitara-logging\src\loggers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\loggers\LoggerMongo.h">
+      <Filter>blocks\sitara-logging\src\loggers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Logging.h">
       <Filter>blocks\sitara-logging\src</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\include\Resources.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\LoggerMongo.h">
+    <ClInclude Include="..\..\..\src\MongoController.h">
       <Filter>blocks\sitara-logging\src</Filter>
     </ClInclude>
   </ItemGroup>

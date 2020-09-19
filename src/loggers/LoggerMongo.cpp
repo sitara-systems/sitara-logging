@@ -6,14 +6,12 @@
 
 using namespace sitara;
 
-LoggerMongo::LoggerMongo(std::string applicationName, std::string uri, std::string database, std::string collection) : mApplicationName(applicationName),
-	mUri(uri),
+LoggerMongo::LoggerMongo(std::string applicationName, mongocxx::client& client, std::string database, std::string collection) : mApplicationName(applicationName),
+	mClient(client),
 	mDatabaseName(database),
 	mCollectionName(collection)
 {
-	MongoController::getInstance().createPool(uri);
-	mClient = MongoController::getInstance().getClientFromPool();
-	mDatabase = mClient->database(mDatabaseName);
+	mDatabase = mClient.database(mDatabaseName);
 	mCollection = mDatabase[mCollectionName];
 }
 

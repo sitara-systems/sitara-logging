@@ -105,11 +105,13 @@
   <ItemGroup />
   <ItemGroup />
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\LoggerMongo.cpp" />
+    <ClCompile Include="..\..\..\src\loggers\LoggerMongo.cpp" />
     <ClCompile Include="..\src\LoggerMongoExampleApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\LoggerMongo.h" />
+    <ClInclude Include="..\..\..\src\loggers\LoggerMongo.h" />
+    <ClInclude Include="..\..\..\src\Logging.h" />
+    <ClInclude Include="..\..\..\src\MongoController.h" />
     <ClInclude Include="..\include\Resources.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
