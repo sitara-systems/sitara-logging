@@ -1,0 +1,70 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="blocks">
+      <UniqueIdentifier>{794f3835-b315-4ba3-8a5b-9b9fa2605313}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blocks\sitara-logging">
+      <UniqueIdentifier>{4ce3899b-bdb6-48bf-a9d6-9af270c771b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blocks\sitara-logging\src">
+      <UniqueIdentifier>{bdfbb81c-a817-41c9-a26d-f49f235b93dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blocks\sitara-logging\src\mongodb">
+      <UniqueIdentifier>{0174ccb8-672d-43eb-a169-1db7510209da}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\MongoEventsExampleApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MongoEventsExampleApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\..\src\mongodb\LoggerMongo.cpp">
+      <Filter>blocks\sitara-logging\src\mongodb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\mongodb\MongoTracker.cpp">
+      <Filter>blocks\sitara-logging\src\mongodb</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\mongodb\LoggerMongo.h">
+      <Filter>blocks\sitara-logging\src\mongodb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\mongodb\MongoController.h">
+      <Filter>blocks\sitara-logging\src\mongodb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Logging.h">
+      <Filter>blocks\sitara-logging\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Measurements.h">
+      <Filter>blocks\sitara-logging\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\mongodb\MongoTracker.h">
+      <Filter>blocks\sitara-logging\src\mongodb</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,5 @@
+{
+  "uri" : "mongodb+srv://mongodb.net/",
+  "database" : "sample-database",
+  "collection" : "sample-collection"
+}

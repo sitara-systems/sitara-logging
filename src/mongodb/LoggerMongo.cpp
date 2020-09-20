@@ -4,15 +4,13 @@
 #include <mongocxx/exception/exception.hpp>
 #include <mongocxx/exception/bulk_write_exception.hpp>
 
-using namespace sitara;
+using namespace sitara::logging;
 
-LoggerMongo::LoggerMongo(std::string applicationName, mongocxx::client& client, std::string database, std::string collection) : mApplicationName(applicationName),
-	mClient(client),
-	mDatabaseName(database),
-	mCollectionName(collection)
+LoggerMongo::LoggerMongo(const std::string& applicationName, mongocxx::client& client, const std::string& database, const std::string& collection) : mApplicationName(applicationName),
+	mClient(client)
 {
-	mDatabase = mClient.database(mDatabaseName);
-	mCollection = mDatabase[mCollectionName];
+	mDatabase = mClient.database(database);
+	mCollection = mDatabase[collection];
 }
 
 LoggerMongo::~LoggerMongo() {
@@ -64,7 +62,7 @@ void LoggerMongo::write(const ci::log::Metadata& meta, const std::string& text) 
 	try {
 		auto res = mCollection.insert_one(document.view());
 	}
-	catch (mongocxx::bulk_write_exception e) {
-		std::cout << "Error in inserting document : " << e.what() << std::endl;
+	catch (mongocxx::bulk_write_exception& e) {
+		CI_LOG_E("Error in inserting document : " << e.what());
 	}
 }

@@ -26,9 +26,7 @@ void LoggerMongoExampleApp::setup() {
 	std::string database = mongoEndpoint["database"].asString();;
 	std::string collection = mongoEndpoint["collection"].asString();;
 
-	sitara::createLoggerMongo("Sitara Systems Test Application", uri, database, collection);
-
-	std::cout << "Setup Complete" << std::endl;
+	sitara::createLoggerMongo("LoggerMongoExample", uri, database, collection);
 }
 
 void LoggerMongoExampleApp::mouseDown( MouseEvent event ) {
