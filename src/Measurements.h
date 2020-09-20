@@ -199,8 +199,16 @@ namespace sitara {
 				mApplicationVersion = applicationVersion;
 			}
 
-			virtual void trackEvent(const std::string& category, const std::string& action, const std::string& label = "", const int value = -1, const std::string& customMessage = "") {};
-			virtual void trackScreenView(const std::string& screenName, const std::string& customMessage = "") {};
+			void trackEvent(const std::string& category, const std::string& action, const std::string& label = "", const int value = -1, const std::string& customMessage = "") {
+				std::shared_ptr<Event> event = std::make_shared<Event>(mApplicationName, mClientId, mProtocolVersion, category, action, label, value, customMessage);
+				trackHit(event);
+			};
+
+			void trackScreenView(const std::string& screenName, const std::string& customMessage = "") {
+				std::shared_ptr<ScreenView> view = std::make_shared<ScreenView>(mApplicationName, mClientId, mProtocolVersion, screenName, customMessage);
+				trackHit(view);
+			};
+			
 			virtual void trackHit(std::shared_ptr<BaseHit> hit) {};
 
 			void setClientId(const std::string& uuid) {
@@ -211,7 +219,7 @@ namespace sitara {
 				return mClientId;
 			}
 
-			void setAppName(const std::string appName) {
+			void setApplicationName(const std::string appName) {
 				mApplicationName = appName;
 			}
 

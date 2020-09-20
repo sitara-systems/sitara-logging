@@ -18,16 +18,6 @@ void MongoTracker::setup(std::string uuid, std::string applicationName, std::str
 	BaseTracker::setup(uuid, applicationName, applicationVersion);
 }
 
-void MongoTracker::trackEvent(const std::string& category, const std::string& action, const std::string& label, const int value, const std::string& customMessage) {
-	std::shared_ptr<Event> event = std::make_shared<Event>(mApplicationName, mClientId, mProtocolVersion, category, action, label, value, customMessage);
-	trackHit(event);
-}
-
-void MongoTracker::trackScreenView(const std::string& screenName, const std::string& customMessage) {
-	std::shared_ptr<ScreenView> view = std::make_shared<ScreenView>(mApplicationName, mClientId, mProtocolVersion, screenName, customMessage);
-	trackHit(view);
-}
-
 void MongoTracker::trackHit(std::shared_ptr<sitara::logging::BaseHit> hit) {
 	auto bsonDocument = hit->getBson();
 	auto bson = bsonDocument.extract();

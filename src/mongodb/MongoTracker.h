@@ -11,9 +11,6 @@ namespace sitara {
 			~MongoTracker();
 
 			void setup(std::string uuid, std::string applicationName, std::string applicationVersion = "") override;
-
-			void trackEvent(const std::string& category, const std::string& action, const std::string& label = "", const int value = -1, const std::string& customMessage = "") override;
-			void trackScreenView(const std::string& screenName, const std::string& customMessage = "") override;
 			void trackHit(std::shared_ptr<sitara::logging::BaseHit> hit) override;
 		protected:
 			MongoTracker(mongocxx::client& client, const std::string& database, const std::string& collection);
