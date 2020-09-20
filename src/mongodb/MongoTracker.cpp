@@ -20,28 +20,12 @@ void MongoTracker::setup(std::string uuid, std::string applicationName, std::str
 
 void MongoTracker::trackEvent(const std::string& category, const std::string& action, const std::string& label, const int value, const std::string& customMessage) {
 	std::shared_ptr<Event> event = std::make_shared<Event>(mApplicationName, mClientId, mProtocolVersion, category, action, label, value, customMessage);
-	auto bsonDocument = event->getBson();
-	auto bson = bsonDocument.extract();
-
-	try {
-		auto res = mCollection.insert_one(bson.view());
-	}
-	catch (mongocxx::bulk_write_exception& e) {
-		CI_LOG_E("Error in inserting document : " << e.what());
-	}
+	trackHit(event);
 }
 
 void MongoTracker::trackScreenView(const std::string& screenName, const std::string& customMessage) {
 	std::shared_ptr<ScreenView> view = std::make_shared<ScreenView>(mApplicationName, mClientId, mProtocolVersion, screenName, customMessage);
-	auto bsonDocument = view->getBson();
-	auto bson = bsonDocument.extract();
-
-	try {
-		auto res = mCollection.insert_one(bson.view());
-	}
-	catch (mongocxx::bulk_write_exception& e) {
-		CI_LOG_E("Error in inserting document : " << e.what());
-	}
+	trackHit(view);
 }
 
 void MongoTracker::trackHit(std::shared_ptr<sitara::logging::BaseHit> hit) {
