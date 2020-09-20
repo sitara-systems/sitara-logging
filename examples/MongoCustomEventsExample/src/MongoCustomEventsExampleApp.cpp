@@ -16,7 +16,7 @@ using namespace std;
 struct ClickEvent : public sitara::logging::BaseHit {
 	ClickEvent(const std::string& appName, const std::string& uuid, const std::string& version,
 		const std::string& button, const ci::vec2& position, const std::string& customMessage = "") :
-		BaseHit(appName, uuid, version, "screenview", customMessage),
+		BaseHit(appName, uuid, version, "clickEvent", customMessage),
 		mButton(button),
 		mPosition(position)
 	{};
