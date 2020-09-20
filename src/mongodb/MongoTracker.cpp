@@ -22,11 +22,18 @@ void MongoTracker::trackHit(std::shared_ptr<sitara::logging::BaseHit> hit) {
 	auto bsonDocument = hit->getBson();
 	auto bson = bsonDocument.extract();
 
-	try {
-		auto res = mCollection.insert_one(bson.view());
+	if (mBatchingEnabled) {
+			CI_LOG_W("Batching hits is not enabled yet!  Please turn batching off.");
+			return;
 	}
-	catch (mongocxx::bulk_write_exception& e) {
-		CI_LOG_E("Error in inserting document : " << e.what());
+	else {
+			// send it off!
+			try {
+				auto res = mCollection.insert_one(bson.view());
+			}
+			catch (mongocxx::bulk_write_exception& e) {
+				CI_LOG_E("Error in inserting document : " << e.what());
+			}
 	}
 }
 

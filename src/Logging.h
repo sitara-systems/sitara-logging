@@ -4,6 +4,7 @@
 #include "mongodb/MongoController.h"
 #include "mongodb/LoggerMongo.h"
 #include "mongodb/MongoTracker.h"
+#include "google/GoogleTracker.h"
 
 namespace sitara {
     static void createLoggerMongo(std::string applicationName, std::string uri, std::string database, std::string collection) {

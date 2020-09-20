@@ -190,7 +190,7 @@ namespace sitara {
 
 		class BaseTracker {
 		public:
-			BaseTracker() : mProtocolVersion("1.0") {};
+			BaseTracker() : mProtocolVersion("1.0"), mBatchingEnabled(false) {};
 			~BaseTracker() {};
 
 			virtual void setup(std::string uuid, std::string applicationName, std::string applicationVersion = "") {
@@ -235,11 +235,20 @@ namespace sitara {
 				return mApplicationVersion;
 			}
 
+			void setBatchingEnabled(bool enabled) {
+				mBatchingEnabled = enabled;
+			}
+
+			bool isBatchingEnabled() {
+				return mBatchingEnabled;
+			}
+
 		protected:			
 			std::string mClientId;
 			std::string mApplicationName;
 			std::string mApplicationVersion;
 			std::string mProtocolVersion;
+			bool mBatchingEnabled;
 		};
 	}
 }
