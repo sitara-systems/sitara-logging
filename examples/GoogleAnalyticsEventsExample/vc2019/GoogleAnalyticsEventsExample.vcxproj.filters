@@ -1,0 +1,73 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="blocks">
+      <UniqueIdentifier>{87169c8a-0b49-4f57-b4f9-8d4c9e16a131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blocks\sitara-logging">
+      <UniqueIdentifier>{2fb7a162-5754-46e9-a1a2-481f5df0d365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blocks\sitara-logging\src">
+      <UniqueIdentifier>{16bdd83a-f8a0-45d6-897c-ea4a5abc9b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blocks\sitara-logging\src\google">
+      <UniqueIdentifier>{81f9b3a0-c848-4ca1-b8d1-97d50ce4b565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blocks\sitara-http">
+      <UniqueIdentifier>{dfae1d4b-cb2a-461b-adad-947a407c403a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="blocks\sitara-http\src">
+      <UniqueIdentifier>{bcabd36a-a039-40bc-bb00-438ff44e1caf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\GoogleAnalyticsEventsExampleApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GoogleAnalyticsEventsExampleApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\..\src\google\GoogleTracker.cpp">
+      <Filter>blocks\sitara-logging\src\google</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\dependencies\sitara-http\src\HttpClient.cpp">
+      <Filter>blocks\sitara-http\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Logging.h">
+      <Filter>blocks\sitara-logging\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Measurements.h">
+      <Filter>blocks\sitara-logging\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\google\GoogleTracker.h">
+      <Filter>blocks\sitara-logging\src\google</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\dependencies\sitara-http\src\HttpClient.h">
+      <Filter>blocks\sitara-http\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

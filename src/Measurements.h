@@ -79,14 +79,14 @@ namespace sitara {
 				std::chrono::milliseconds currentTime = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 				float queueTime = (currentTime - mTimestamp).count();
 
-				parameterStream << "v=" << mProtocolVersion << "&an=" << ci::Url::encode(mApplicationName) <<
-					"&cid" << mClientId << "&t=" << mMeasurementType << "&qt" << queueTime;
+				parameterStream << "v=" << ci::Url::encode(mProtocolVersion) << "&an=" << ci::Url::encode(mApplicationName) <<
+					"&cid=" << ci::Url::encode(mClientId) << "&t=" << ci::Url::encode(mMeasurementType) << "&qt=" << queueTime;
 
 				if (!mAppVersion.empty()) {
-					parameterStream << "&av=" << mAppVersion;
+					parameterStream << "&av=" << ci::Url::encode(mAppVersion);
 				}
 				if (!mCustomMessage.empty()) {
-					parameterStream << mCustomMessage;
+					parameterStream << ci::Url::encode(mCustomMessage);
 				}
 				if (mAnonymizeIp) {
 					parameterStream << "&aip=1";
@@ -98,7 +98,7 @@ namespace sitara {
 					parameterStream << "&sc=end";
 				}
 				if (mCacheBuster) {
-					parameterStream << "&z=" << std::to_string(rand());
+					parameterStream << "&z=" << ci::Url::encode(std::to_string(rand()));
 				}
 
 				return parameterStream;
@@ -144,13 +144,13 @@ namespace sitara {
 		protected:
 			virtual std::ostringstream getStream() const {
 				std::ostringstream parameterStream = BaseHit::getStream();
-				parameterStream << "&ec" << ci::Url::encode(mCategory);
-				parameterStream << "&ea" << ci::Url::encode(mAction);
+				parameterStream << "&ec=" << ci::Url::encode(mCategory);
+				parameterStream << "&ea=" << ci::Url::encode(mAction);
 				if (!mLabel.empty()) {
-					parameterStream << "&el" << ci::Url::encode(mLabel);
+					parameterStream << "&el=" << ci::Url::encode(mLabel);
 				}
 				if (mValue > 0) {
-					parameterStream << "&ev" << mValue;
+					parameterStream << "&ev=" << mValue;
 				}
 
 				return parameterStream;
@@ -182,7 +182,7 @@ namespace sitara {
 		protected:
 			virtual std::ostringstream getStream() const {
 				std::ostringstream parameterStream = BaseHit::getStream();
-				parameterStream << "&cd" << ci::Url::encode(mScreenName);
+				parameterStream << "&cd=" << ci::Url::encode(mScreenName);
 
 				return parameterStream;
 			}
@@ -190,10 +190,10 @@ namespace sitara {
 
 		class BaseTracker {
 		public:
-			BaseTracker() : mProtocolVersion("1.0"), mBatchingEnabled(false) {};
+			BaseTracker() : mProtocolVersion("1"), mBatchingEnabled(false) {};
 			~BaseTracker() {};
 
-			virtual void setup(std::string uuid, std::string applicationName, std::string applicationVersion = "") {
+			virtual void setup(const std::string& uuid, const std::string& applicationName, const std::string& applicationVersion = "") {
 				mClientId = uuid;
 				mApplicationName = applicationName;
 				mApplicationVersion = applicationVersion;

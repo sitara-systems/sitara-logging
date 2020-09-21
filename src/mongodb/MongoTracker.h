@@ -10,7 +10,7 @@ namespace sitara {
 			static std::shared_ptr<MongoTracker> make(const std::string& uri, const std::string& database, const std::string& collection);
 			~MongoTracker();
 
-			void setup(std::string uuid, std::string applicationName, std::string applicationVersion = "") override;
+			void setup(const std::string& uuid, const std::string& applicationName, const std::string& applicationVersion = "") override;
 			void trackHit(std::shared_ptr<sitara::logging::BaseHit> hit) override;
 		protected:
 			MongoTracker(mongocxx::client& client, const std::string& database, const std::string& collection);
