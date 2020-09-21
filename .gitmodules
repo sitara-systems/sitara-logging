@@ -1,3 +1,0 @@
-[submodule "dependencies\\sitara-http"]
-	path = dependencies\\sitara-http
-	url = https://github.com/sitara-systems/sitara-http
