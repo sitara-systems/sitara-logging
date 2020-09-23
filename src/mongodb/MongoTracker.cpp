@@ -14,7 +14,7 @@ std::shared_ptr<MongoTracker> MongoTracker::make(const std::string& uri, const s
 MongoTracker::~MongoTracker() {
 }
 
-void MongoTracker::setup(std::string uuid, std::string applicationName, std::string applicationVersion) {
+void MongoTracker::setup(const std::string& uuid, const std::string& applicationName, const std::string& applicationVersion) {
 	BaseTracker::setup(uuid, applicationName, applicationVersion);
 }
 

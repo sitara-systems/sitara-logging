@@ -18,6 +18,9 @@ LoggerMongo::~LoggerMongo() {
 }
 
 void LoggerMongo::write(const ci::log::Metadata& meta, const std::string& text) {
+	if (meta.mLevel < mMinLevel) {
+		return;
+	}
 	std::string locationString = meta.mLocation.getFunctionName();
 	std::string logLevel = "";
 
@@ -65,4 +68,8 @@ void LoggerMongo::write(const ci::log::Metadata& meta, const std::string& text) 
 	catch (mongocxx::bulk_write_exception& e) {
 		CI_LOG_E("Error in inserting document : " << e.what());
 	}
+}
+
+void LoggerMongo::setLoggingLevel(ci::log::Level minLevel) {
+	mMinLevel = minLevel;
 }
