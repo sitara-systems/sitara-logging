@@ -12,11 +12,15 @@ namespace sitara {
             ~LoggerMongo();
             void write(const ci::log::Metadata& meta, const std::string& text) override;
             void setLoggingLevel(ci::log::Level minLevel);
+            void setClientId(const std::string& clientId);
+            void setApplicationVersion(const std::string& applicationVersion);
         protected:
             mongocxx::client& mClient;
             mongocxx::database mDatabase;
             mongocxx::collection mCollection;
             std::string mApplicationName;
+            std::string mApplicationVersion;
+            std::string mClientId;
             ci::log::Level mMinLevel;
         };
     }

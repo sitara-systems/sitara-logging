@@ -23,11 +23,12 @@ namespace sitara {
 		};
 
 		struct BaseHit {
-			BaseHit(const std::string& appName, const std::string& uuid, const std::string& version, const std::string& type, const std::string& customMessage = "") :
+			BaseHit(const std::string& appName, const std::string& uuid, const std::string& appVersion, const std::string& type, const std::string& customMessage = "") :
 				mTimestamp(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch())),
 				mApplicationName(appName),
 				mClientId(uuid),
-				mProtocolVersion(version),
+				mAppVersion(appVersion),
+				mProtocolVersion("1"),
 				mMeasurementType(type),
 				mCustomMessage(customMessage)
 			{
@@ -106,9 +107,9 @@ namespace sitara {
 		};
 
 		struct Event : public BaseHit {
-			Event(const std::string& appName, const std::string& uuid, const std::string& version,
+			Event(const std::string& appName, const std::string& uuid, const std::string& appVersion,
 				const std::string& category, const std::string& action, const std::string& label, double value = -1, const std::string& customMessage = "") :
-				BaseHit(appName, uuid, version, "event", customMessage),
+				BaseHit(appName, uuid, appVersion, "event", customMessage),
 				mCategory(category),
 				mAction(action),
 				mLabel(label),
@@ -158,9 +159,9 @@ namespace sitara {
 		};
 
 		struct ScreenView : public BaseHit {
-			ScreenView(const std::string& appName, const std::string& uuid, const std::string& version,
+			ScreenView(const std::string& appName, const std::string& uuid, const std::string& appVersion,
 				const std::string& screenName, const std::string& customMessage = "") :
-				BaseHit(appName, uuid, version, "screenview", customMessage),
+				BaseHit(appName, uuid, appVersion, "screenview", customMessage),
 				mScreenName(screenName)
 			{};
 
@@ -190,7 +191,7 @@ namespace sitara {
 
 		class BaseTracker {
 		public:
-			BaseTracker() : mProtocolVersion("1"), mBatchingEnabled(false) {};
+			BaseTracker() : mBatchingEnabled(false) {};
 			~BaseTracker() {};
 
 			virtual void setup(const std::string& uuid, const std::string& applicationName, const std::string& applicationVersion = "") {
@@ -200,12 +201,12 @@ namespace sitara {
 			}
 
 			void trackEvent(const std::string& category, const std::string& action, const std::string& label = "", const int value = -1, const std::string& customMessage = "") {
-				std::shared_ptr<Event> event = std::make_shared<Event>(mApplicationName, mClientId, mProtocolVersion, category, action, label, value, customMessage);
+				std::shared_ptr<Event> event = std::make_shared<Event>(mApplicationName, mClientId, mApplicationVersion, category, action, label, value, customMessage);
 				trackHit(event);
 			};
 
 			void trackScreenView(const std::string& screenName, const std::string& customMessage = "") {
-				std::shared_ptr<ScreenView> view = std::make_shared<ScreenView>(mApplicationName, mClientId, mProtocolVersion, screenName, customMessage);
+				std::shared_ptr<ScreenView> view = std::make_shared<ScreenView>(mApplicationName, mClientId, mApplicationVersion, screenName, customMessage);
 				trackHit(view);
 			};
 			
@@ -247,7 +248,6 @@ namespace sitara {
 			std::string mClientId;
 			std::string mApplicationName;
 			std::string mApplicationVersion;
-			std::string mProtocolVersion;
 			bool mBatchingEnabled;
 		};
 	}

@@ -7,7 +7,9 @@
 using namespace sitara::logging;
 
 LoggerMongo::LoggerMongo(const std::string& applicationName, mongocxx::client& client, const std::string& database, const std::string& collection) : mApplicationName(applicationName),
-	mClient(client)
+	mClient(client),
+	mClientId(""),
+	mApplicationVersion("")
 {
 	mDatabase = mClient.database(database);
 	mCollection = mDatabase[collection];
@@ -56,14 +58,23 @@ void LoggerMongo::write(const ci::log::Metadata& meta, const std::string& text) 
 	std::cout << "\ttimestamp : " << millisSinceEpoch.count() << std::endl;
 	std::cout << "\tmessage : " << text << std::endl;
 
-	bsoncxx::document::value document = bsoncxx::builder::basic::make_document(bsoncxx::builder::basic::kvp("applicationName", bsoncxx::stdx::string_view(mApplicationName)),
-		bsoncxx::builder::basic::kvp("logLevel", bsoncxx::stdx::string_view(logLevel)),
-		bsoncxx::builder::basic::kvp("functionName", bsoncxx::stdx::string_view(locationString)),
-		bsoncxx::builder::basic::kvp("timestamp", bsoncxx::types::b_date(millisSinceEpoch)),
-		bsoncxx::builder::basic::kvp("message", bsoncxx::stdx::string_view(text)));
+	bsoncxx::builder::basic::document bsonBuilder;
+	bsonBuilder.append(bsoncxx::builder::basic::kvp("applicationName", bsoncxx::stdx::string_view(mApplicationName)));
+	bsonBuilder.append(bsoncxx::builder::basic::kvp("logLevel", bsoncxx::stdx::string_view(logLevel)));
+	bsonBuilder.append(bsoncxx::builder::basic::kvp("functionName", bsoncxx::stdx::string_view(locationString)));
+	bsonBuilder.append(bsoncxx::builder::basic::kvp("timestamp", bsoncxx::types::b_date(millisSinceEpoch)));
+	bsonBuilder.append(bsoncxx::builder::basic::kvp("message", bsoncxx::stdx::string_view(text)));
+
+	if (!mClientId.empty()) {
+		bsonBuilder.append(bsoncxx::builder::basic::kvp("clientId", bsoncxx::stdx::string_view(mClientId)));
+	}
+
+	if (!mApplicationVersion.empty()) {
+		bsonBuilder.append(bsoncxx::builder::basic::kvp("applicationVersion", bsoncxx::stdx::string_view(mApplicationVersion)));
+	}
 
 	try {
-		auto res = mCollection.insert_one(document.view());
+		auto res = mCollection.insert_one(bsonBuilder.view());
 	}
 	catch (mongocxx::bulk_write_exception& e) {
 		CI_LOG_E("Error in inserting document : " << e.what());
@@ -72,4 +83,12 @@ void LoggerMongo::write(const ci::log::Metadata& meta, const std::string& text) 
 
 void LoggerMongo::setLoggingLevel(ci::log::Level minLevel) {
 	mMinLevel = minLevel;
+}
+
+void LoggerMongo::setClientId(const std::string& clientId) {
+	mClientId = clientId;
+}
+
+void LoggerMongo::setApplicationVersion(const std::string& applicationVersion) {
+	mApplicationVersion = applicationVersion;
 }
