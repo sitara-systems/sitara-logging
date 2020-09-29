@@ -236,8 +236,12 @@ namespace sitara {
 				return mApplicationVersion;
 			}
 
-			void setBatchingEnabled(bool enabled) {
-				mBatchingEnabled = enabled;
+			void enableBatching() {
+				mBatchingEnabled = true;
+			}
+
+			void disableBatching() {
+				mBatchingEnabled = false;
 			}
 
 			bool isBatchingEnabled() {

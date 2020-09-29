@@ -4,14 +4,53 @@
 
 using namespace sitara::logging;
 
-std::shared_ptr<MongoTracker> MongoTracker::make(const std::string& uri, const std::string& database, const std::string& collection) {
+MongoTracker::MongoTracker(const std::string& uri, const std::string& database, const std::string& collection) : 
+	mUri(uri), 
+	mDatabaseName(database), 
+	mCollectionName(collection),
+	mBatchSize(10),
+	mIsWriting(true) {
 	sitara::logging::MongoController::getInstance().createPool(uri);
-	mongocxx::pool::entry client = sitara::logging::MongoController::getInstance().getClientFromPool();
-	std::shared_ptr<MongoTracker> mongoTrackerPtr = std::shared_ptr<MongoTracker>(new MongoTracker(*client, database, collection));
-	return mongoTrackerPtr;
+
+	mWriteThread = std::thread([&]() {
+		mongocxx::pool::entry client = sitara::logging::MongoController::getInstance().getClientFromPool();
+
+		while (mIsWriting) {
+			if (mBatchingEnabled) {
+				std::lock_guard<std::mutex> lock(mDocumentMutex);
+				if (mDocumentVector.size() > mBatchSize) {
+					// wait until the batch size is met, then send all documents at once
+					try {
+						auto res = client->database(mDatabaseName)[mCollectionName].insert_many(mDocumentVector);
+						mDocumentVector.clear();
+					}
+					catch (mongocxx::bulk_write_exception& e) {
+						CI_LOG_E("Error in inserting document : " << e.what());
+					}
+				}
+			}
+			else {
+				while (!mDocumentQueue.empty()) {
+					bsoncxx::v_noabi::document::view documentView = mDocumentQueue.front().view();
+
+					try {
+						auto res = client->database(mDatabaseName)[mCollectionName].insert_one(documentView);
+					}
+					catch (mongocxx::bulk_write_exception& e) {
+						CI_LOG_E("Error in inserting document : " << e.what());
+					}
+
+					mDocumentQueue.pop();
+				}
+			}
+			std::this_thread::sleep_for(std::chrono::milliseconds(16));
+		}
+	});
 }
 
 MongoTracker::~MongoTracker() {
+	mIsWriting = false;
+	mWriteThread.join();
 }
 
 void MongoTracker::setup(const std::string& uuid, const std::string& applicationName, const std::string& applicationVersion) {
@@ -19,25 +58,18 @@ void MongoTracker::setup(const std::string& uuid, const std::string& application
 }
 
 void MongoTracker::trackHit(std::shared_ptr<sitara::logging::BaseHit> hit) {
-	auto bsonDocument = hit->getBson();
-	auto bson = bsonDocument.extract();
+	bsoncxx::builder::basic::document bsonDocument = hit->getBson();
+	bsoncxx::v_noabi::document::value bson = bsonDocument.extract();
 
+	std::lock_guard<std::mutex> lock(mDocumentMutex);
 	if (mBatchingEnabled) {
-			CI_LOG_W("Batching hits is not enabled yet!  Please turn batching off.");
-			return;
+		mDocumentVector.push_back(bson);
 	}
 	else {
-			// send it off!
-			try {
-				auto res = mCollection.insert_one(bson.view());
-			}
-			catch (mongocxx::bulk_write_exception& e) {
-				CI_LOG_E("Error in inserting document : " << e.what());
-			}
+		mDocumentQueue.push(bson);
 	}
 }
 
-MongoTracker::MongoTracker(mongocxx::client& client, const std::string& database, const std::string& collection) : mClient(client) {
-	mDatabase = mClient.database(database);
-	mCollection = mDatabase[collection];
+void MongoTracker::setBatchSize(int batchSize) {
+	mBatchSize = batchSize;
 }
