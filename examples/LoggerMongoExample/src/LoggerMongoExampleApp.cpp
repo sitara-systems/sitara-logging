@@ -21,7 +21,18 @@ class LoggerMongoExampleApp : public App {
 void LoggerMongoExampleApp::setup() {
 	Json::Reader reader;
 	Json::Value mongoEndpoint;
-	reader.parse(ci::loadString(ci::app::loadAsset("settings.json")), mongoEndpoint);
+
+	bool readFile = true;
+
+	try {
+		reader.parse(ci::loadString(ci::app::loadAsset("settings.json")), mongoEndpoint);
+	}
+	catch(ci::app::AssetLoadExc &e) {
+		std::cout << "ERROR: " << e.what() << std::endl;
+		ci::sleep(5000);
+		exit(0);
+	}
+
 	std::string uri = mongoEndpoint["uri"].asString();
 	std::string database = mongoEndpoint["database"].asString();;
 	std::string collection = mongoEndpoint["collection"].asString();;
