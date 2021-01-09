@@ -64,7 +64,7 @@ public:
 	static std::shared_ptr<ClickMongoTracker> make(const std::string& uri, const std::string& database, const std::string& collection) {
 		sitara::logging::MongoController::getInstance().createPool(uri);
 		mongocxx::pool::entry client = sitara::logging::MongoController::getInstance().getClientFromPool();
-		std::shared_ptr<ClickMongoTracker> mongoTrackerPtr = std::make_shared<ClickMongoTracker>(*client, database, collection);
+		std::shared_ptr<ClickMongoTracker> mongoTrackerPtr(new ClickMongoTracker(*client, database, collection));
 		return mongoTrackerPtr;
 	}
 
@@ -73,6 +73,7 @@ public:
 		trackHit(click);
 	}
 
+protected:
 	ClickMongoTracker(mongocxx::client& client, const std::string& database, const std::string& collection) : sitara::logging::MongoTracker(client.uri().to_string(), database, collection) {
 	}
 };
