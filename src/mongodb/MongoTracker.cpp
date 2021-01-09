@@ -10,6 +10,7 @@ MongoTracker::MongoTracker(const std::string& uri, const std::string& database, 
 	mCollectionName(collection),
 	mBatchSize(10),
 	mIsWriting(true) {
+
 	sitara::logging::MongoController::getInstance().createPool(uri);
 
 	mWriteThread = std::thread([&]() {

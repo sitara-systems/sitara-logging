@@ -64,7 +64,7 @@ public:
 	static std::shared_ptr<ClickMongoTracker> make(const std::string& uri, const std::string& database, const std::string& collection) {
 		sitara::logging::MongoController::getInstance().createPool(uri);
 		mongocxx::pool::entry client = sitara::logging::MongoController::getInstance().getClientFromPool();
-		std::shared_ptr<ClickMongoTracker> mongoTrackerPtr = std::shared_ptr<ClickMongoTracker>(new ClickMongoTracker(*client, database, collection));
+		std::shared_ptr<ClickMongoTracker> mongoTrackerPtr = std::make_shared<ClickMongoTracker>(*client, database, collection);
 		return mongoTrackerPtr;
 	}
 
@@ -72,8 +72,8 @@ public:
 		std::shared_ptr<ClickEvent> click = std::make_shared<ClickEvent>(mApplicationName, mClientId, mProtocolVersion, button, position, customMessage);
 		trackHit(click);
 	}
-protected:
-	ClickMongoTracker(mongocxx::client& client, const std::string& database, const std::string& collection) : sitara::logging::MongoTracker(client, database, collection) {
+
+	ClickMongoTracker(mongocxx::client& client, const std::string& database, const std::string& collection) : sitara::logging::MongoTracker(client.uri().to_string(), database, collection) {
 	}
 };
 
@@ -91,7 +91,16 @@ class MongoCustomEventsExampleApp : public App {
 void MongoCustomEventsExampleApp::setup() {
 	Json::Reader reader;
 	Json::Value mongoEndpoint;
-	reader.parse(ci::loadString(ci::app::loadAsset("settings.json")), mongoEndpoint);
+
+	try {
+		reader.parse(ci::loadString(ci::app::loadAsset("settings.json")), mongoEndpoint);
+	}
+	catch (ci::app::AssetLoadExc& e) {
+		std::cout << "ERROR: " << e.what() << std::endl;
+		ci::sleep(5000);
+		exit(0);
+	}
+
 	std::string uri = mongoEndpoint["uri"].asString();
 	std::string database = mongoEndpoint["database"].asString();;
 	std::string collection = mongoEndpoint["collection"].asString();;

@@ -1,5 +1,0 @@
-{
-  "uri" : "mongodb+srv://TateModern:Modern2021@tate-hymtf-2020.g4eag.mongodb.net/<dbname>?retryWrites=true&w=majority",
-  "database" : "debug",
-  "collection" : "mongoCustomEventsExample"
-}

@@ -21,7 +21,14 @@ class MongoEventsExampleApp : public App {
 void MongoEventsExampleApp::setup() {
 	Json::Reader reader;
 	Json::Value mongoEndpoint;
-	reader.parse(ci::loadString(ci::app::loadAsset("settings.json")), mongoEndpoint);
+	try {
+		reader.parse(ci::loadString(ci::app::loadAsset("settings.json")), mongoEndpoint);
+	}
+	catch (ci::app::AssetLoadExc &e) {
+		std::cout << "ERROR : " << e.what() << std::endl;
+		ci::sleep(5000);
+		exit(0);
+	}
 	std::string uri = mongoEndpoint["uri"].asString();
 	std::string database = mongoEndpoint["database"].asString();;
 	std::string collection = mongoEndpoint["collection"].asString();;
@@ -29,7 +36,7 @@ void MongoEventsExampleApp::setup() {
 	std::string appName = "MongoEventsExample";
 	std::string uuid = "c0670cb4-fad0-11ea-adc1-0242ac120002";
 
-	mTracker = sitara::logging::MongoTracker::make(uri, database, collection);
+	mTracker = std::make_shared<sitara::logging::MongoTracker>(uri, database, collection);
 	mTracker->setup(uuid, appName);
 }
 

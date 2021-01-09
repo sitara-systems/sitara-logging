@@ -3,8 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MongoCustomEventsExample", "MongoCustomEventsExample.vcxproj", "{DBFEBFB6-4CAE-4C41-9870-120A6266D00B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB} = {91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}
+		{92B5BE70-DCAA-40E4-92D8-CC2B95AA28BE} = {92B5BE70-DCAA-40E4-92D8-CC2B95AA28BE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cinder", "..\..\..\..\cinder\proj\vc2019\cinder.vcxproj", "{92B5BE70-DCAA-40E4-92D8-CC2B95AA28BE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sitara-logging", "..\..\..\proj\sitara-logging.vcxproj", "{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{92B5BE70-DCAA-40E4-92D8-CC2B95AA28BE} = {92B5BE70-DCAA-40E4-92D8-CC2B95AA28BE}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +77,30 @@ Global
 		{92B5BE70-DCAA-40E4-92D8-CC2B95AA28BE}.Release|x64.Build.0 = Release|x64
 		{92B5BE70-DCAA-40E4-92D8-CC2B95AA28BE}.Release|x86.ActiveCfg = Release|Win32
 		{92B5BE70-DCAA-40E4-92D8-CC2B95AA28BE}.Release|x86.Build.0 = Release|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug_ANGLE|x64.ActiveCfg = Debug|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug_ANGLE|x64.Build.0 = Debug|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug_ANGLE|x86.ActiveCfg = Debug|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug_ANGLE|x86.Build.0 = Debug|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug_Shared|x64.ActiveCfg = Debug|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug_Shared|x64.Build.0 = Debug|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug_Shared|x86.ActiveCfg = Debug|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug_Shared|x86.Build.0 = Debug|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug|x64.ActiveCfg = Debug|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug|x64.Build.0 = Debug|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug|x86.ActiveCfg = Debug|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Debug|x86.Build.0 = Debug|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release_ANGLE|x64.ActiveCfg = Release|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release_ANGLE|x64.Build.0 = Release|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release_ANGLE|x86.ActiveCfg = Release|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release_ANGLE|x86.Build.0 = Release|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release_Shared|x64.ActiveCfg = Release|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release_Shared|x64.Build.0 = Release|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release_Shared|x86.ActiveCfg = Release|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release_Shared|x86.Build.0 = Release|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release|x64.ActiveCfg = Release|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release|x64.Build.0 = Release|x64
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release|x86.ActiveCfg = Release|Win32
+		{91777054-C0EF-4D5F-A10C-E6CD6E79E1BB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
