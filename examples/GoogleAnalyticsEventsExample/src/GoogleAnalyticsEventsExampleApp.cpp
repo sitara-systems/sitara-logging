@@ -22,7 +22,13 @@ void GoogleAnalyticsEventsExampleApp::setup() {
 	Json::Reader reader;
 	Json::Value googleSettings;
 
-	reader.parse(ci::loadString(ci::app::loadAsset("settings.json")), googleSettings);
+	try {
+		reader.parse(ci::loadString(ci::app::loadAsset("settings.json")), googleSettings);
+	}
+	catch (ci::app::AssetLoadExc& e) {
+		std::cout << "ERROR : " << e.what() << std::endl;
+	}
+
 	std::string googleId = googleSettings["tracking_id"].asString();
 
 	std::string appName = "GoogleAnalyticsEventsExample";
