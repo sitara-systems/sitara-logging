@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\google">
+      <UniqueIdentifier>{27fb829a-e3d5-49d6-9aa9-cae3fed8e571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mongodb">
+      <UniqueIdentifier>{b3280805-2d82-42e0-9f67-4132b1d0bcee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\google">
+      <UniqueIdentifier>{214cee9d-9607-4e25-9e90-a4cb9979be6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mongodb">
+      <UniqueIdentifier>{5f9e6acf-250d-41ee-af74-b37cdd186485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sitara-http">
+      <UniqueIdentifier>{a240b990-24f4-4d43-8d4a-76d210aa8a1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sitara-http">
+      <UniqueIdentifier>{e7eddb76-9d5a-4ed1-a068-87a0f0e340b5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Logging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Measurements.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mongodb\LoggerMongo.h">
+      <Filter>Header Files\mongodb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mongodb\MongoController.h">
+      <Filter>Header Files\mongodb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mongodb\MongoTracker.h">
+      <Filter>Header Files\mongodb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\google\GoogleTracker.h">
+      <Filter>Header Files\google</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sitara-logging.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\google\GoogleTracker.cpp">
+      <Filter>Source Files\google</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mongodb\LoggerMongo.cpp">
+      <Filter>Source Files\mongodb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mongodb\MongoTracker.cpp">
+      <Filter>Source Files\mongodb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\dependencies\sitara-http\src\HttpClient.cpp">
+      <Filter>Source Files\sitara-http</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
