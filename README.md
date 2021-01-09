@@ -16,6 +16,6 @@ The easiest way to get these is via [vcpkg](https://github.com/microsoft/vcpkg/)
 git clone https://github.com/microsoft/vcpkg/
 cd vcpkg
 ./bootstrap-vcpkg.bat
-./vcpkg.exe install mongo-cxx-driver:x64-windows curl[openssl]:x64-windows
+./vcpkg.exe install mongo-cxx-driver:x64-windows-static curl[openssl]:x64-windows-static
 ./vcpkg.exe integrate install
 ```

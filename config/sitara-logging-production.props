@@ -12,6 +12,9 @@
     <ClCompile>
       <AdditionalIncludeDirectories>$(SITARA_LOGGING_ROOT)\src;$(SITARA_HTTP_ROOT)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="SITARA_LOGGING_ROOT">
