@@ -1,0 +1,25 @@
+{
+	"name": "sitara-logging",
+	"version-string": "v0.1",
+	"port-version": 0,
+	"description": [
+		"A block for tracking app activity via Google Analytics or MongoDB.",
+        "Copy the dependencies below to the vcpkg.json file for your project."
+	],
+	"homepage": "https://github.com/sitara-systems/sitara-logging",
+	"documentation": "",
+	"maintainers": [
+		"Nathan Lachenmyer <nathan@sitara.systems>"
+	],
+	"dependencies": [
+		{
+			"name": "curl",
+			"features": [
+				"ssl"
+			]
+		},
+		{
+			"name": "mongo-cxx-driver"
+		}
+    ]
+}
