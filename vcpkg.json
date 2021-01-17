@@ -4,8 +4,7 @@
 	"port-version": 0,
 	"description": [
 		"A block for tracking app activity via Google Analytics or MongoDB.",
-        "Copy the dependencies below to the vcpkg.json file for your project.",
-		"Install using the command: .\vcpkg.exe install --x-manifest-root .. --triplet x64-windows-static"
+        "Copy the dependencies below to the vcpkg.json file for your project."
 	],
 	"homepage": "https://github.com/sitara-systems/sitara-logging",
 	"documentation": "",
