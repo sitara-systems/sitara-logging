@@ -16,6 +16,9 @@
       <AdditionalDependencies>sitara-logging.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
+    <Lib>
+      <AdditionalDependencies>Ws2_32.Lib;wldap32.lib;Crypt32.lib;Bcrypt.lib;Secur32.lib;Dnsapi.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="BLOCK_ROOT">
