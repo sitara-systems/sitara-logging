@@ -1,21 +1,24 @@
 # sitara-logging
+
 Classes for logging activity from an application
 
 ## Requirements
+
 ### Cinder
+
 This project explicitly relies on [Cinder](https://github.com/cinder/cinder) for logging.
 
 ### Other Libraries
+
 This library uses:
-* `mongo-cxx-driver`
-* `libcurl`
 
-The easiest way to get these is via [vcpkg](https://github.com/microsoft/vcpkg/):
+-   `mongo-cxx-driver`
+-   `libcurl`
 
-```
-git clone https://github.com/microsoft/vcpkg/
-cd vcpkg
-./bootstrap-vcpkg.bat
-./vcpkg.exe install mongo-cxx-driver:x64-windows-static curl[openssl]:x64-windows-static
-./vcpkg.exe integrate install
-```
+The included `vcpkg.json` should automatically download and build the dependencies for all examples in here.  This block also requires cinder to be in an adjacent folder for the cinder dependencies to be found automatically:
+
+    parentFolder/
+        sitara-logging/
+        cinder/
+
+Use the included `vcpkg.json` as a jumping off point for adding this block into other projects!
