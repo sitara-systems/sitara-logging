@@ -13,6 +13,7 @@ LoggerMongo::LoggerMongo(const std::string& applicationName, mongocxx::client& c
 {
 	mDatabase = mClient.database(database);
 	mCollection = mDatabase[collection];
+	mIsUsingConsole = false;
 }
 
 LoggerMongo::~LoggerMongo() {
@@ -53,10 +54,12 @@ void LoggerMongo::write(const ci::log::Metadata& meta, const std::string& text) 
 	auto duration = now.time_since_epoch();
 	auto millisSinceEpoch = std::chrono::duration_cast<std::chrono::milliseconds>(duration);
 
-	std::cout << "\tlogLevel : " << logLevel << std::endl;
-	std::cout << "\tfunctionName : " << locationString << std::endl;
-	std::cout << "\ttimestamp : " << millisSinceEpoch.count() << std::endl;
-	std::cout << "\tmessage : " << text << std::endl;
+	if (mIsUsingConsole) {
+		std::cout << "\tlogLevel : " << logLevel << std::endl;
+		std::cout << "\tfunctionName : " << locationString << std::endl;
+		std::cout << "\ttimestamp : " << millisSinceEpoch.count() << std::endl;
+		std::cout << "\tmessage : " << text << std::endl;
+	}
 
 	bsoncxx::builder::basic::document bsonBuilder;
 	bsonBuilder.append(bsoncxx::builder::basic::kvp("applicationName", bsoncxx::stdx::string_view(mApplicationName)));
@@ -91,4 +94,8 @@ void LoggerMongo::setClientId(const std::string& clientId) {
 
 void LoggerMongo::setApplicationVersion(const std::string& applicationVersion) {
 	mApplicationVersion = applicationVersion;
+}
+
+void LoggerMongo::logToConsole(bool console) {
+	mIsUsingConsole = console;
 }

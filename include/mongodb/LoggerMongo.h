@@ -14,6 +14,7 @@ namespace sitara {
             void setLoggingLevel(ci::log::Level minLevel);
             void setClientId(const std::string& clientId);
             void setApplicationVersion(const std::string& applicationVersion);
+            void logToConsole(bool console);
         protected:
             mongocxx::client& mClient;
             mongocxx::database mDatabase;
@@ -22,6 +23,7 @@ namespace sitara {
             std::string mApplicationVersion;
             std::string mClientId;
             ci::log::Level mMinLevel;
+            bool mIsUsingConsole;
         };
     }
 }
