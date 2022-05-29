@@ -11,7 +11,7 @@
 
 namespace sitara {
 	namespace logging {
-		static std::shared_ptr<sitara::logging::LoggerMongo> createLoggerMongo(std::string applicationName, std::string uri, std::string database, std::string collection) {
+		static inline std::shared_ptr<sitara::logging::LoggerMongo> createLoggerMongo(std::string applicationName, std::string uri, std::string database, std::string collection) {
 			sitara::logging::MongoController::getInstance().createPool(uri);
 			mongocxx::pool::entry client = sitara::logging::MongoController::getInstance().getClientFromPool();
 
@@ -27,7 +27,7 @@ namespace sitara {
 			return ptr;
 		}
 
-		void loadLoggerFromFile(const std::filesystem::path& mongoConfigFile) {
+		inline void loadLoggerFromFile(const std::filesystem::path& mongoConfigFile) {
 			if (!ci::app::getAssetPath(mongoConfigFile).empty()) {
 				Json::Reader jsonReader;
 				Json::Value mongoRoot;

@@ -45,7 +45,7 @@ MongoTracker::MongoTracker(const std::string& uri, const std::string& database, 
 				}
 			}
 			std::this_thread::sleep_for(std::chrono::milliseconds(16));
-		}
+			}
 	});
 }
 
