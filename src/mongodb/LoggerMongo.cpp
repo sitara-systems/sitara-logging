@@ -80,7 +80,8 @@ void LoggerMongo::write(const ci::log::Metadata& meta, const std::string& text) 
 		auto res = mCollection.insert_one(bsonBuilder.view());
 	}
 	catch (mongocxx::bulk_write_exception& e) {
-		CI_LOG_E("Error in inserting document : " << e.what());
+        std::cout << "|ERROR  | LoggerMongo::write()[80] Error in inserting document: " << e.what() << " This error occured while logging, and may block future attempts to block this and other errors." << std::endl;
+		//CI_LOG_E("Error in inserting document : " << e.what());
 	}
 }
 
