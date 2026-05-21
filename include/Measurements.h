@@ -43,17 +43,17 @@ namespace sitara {
 			virtual bsoncxx::builder::basic::document getBson() const {
 				bsoncxx::builder::basic::document bsonBuilder;
 
-				bsonBuilder.append(bsoncxx::builder::basic::kvp("version", bsoncxx::types::b_utf8(mProtocolVersion)));
-				bsonBuilder.append(bsoncxx::builder::basic::kvp("applicationName", bsoncxx::types::b_utf8(mApplicationName)));
-				bsonBuilder.append(bsoncxx::builder::basic::kvp("clientId", bsoncxx::types::b_utf8(mClientId)));
-				bsonBuilder.append(bsoncxx::builder::basic::kvp("type", bsoncxx::types::b_utf8(mMeasurementType)));
+				bsonBuilder.append(bsoncxx::builder::basic::kvp("version", bsoncxx::types::b_string(mProtocolVersion)));
+				bsonBuilder.append(bsoncxx::builder::basic::kvp("applicationName", bsoncxx::types::b_string(mApplicationName)));
+				bsonBuilder.append(bsoncxx::builder::basic::kvp("clientId", bsoncxx::types::b_string(mClientId)));
+				bsonBuilder.append(bsoncxx::builder::basic::kvp("type", bsoncxx::types::b_string(mMeasurementType)));
 				bsonBuilder.append(bsoncxx::builder::basic::kvp("timestamp", bsoncxx::types::b_date(std::chrono::milliseconds(mTimestamp))));
 
 				if (!mAppVersion.empty()) {
-					bsonBuilder.append(bsoncxx::builder::basic::kvp("applicationVersion", bsoncxx::types::b_utf8(mAppVersion)));
+					bsonBuilder.append(bsoncxx::builder::basic::kvp("applicationVersion", bsoncxx::types::b_string(mAppVersion)));
 				}
 				if (!mCustomMessage.empty()) {
-					bsonBuilder.append(bsoncxx::builder::basic::kvp("message", bsoncxx::types::b_utf8(mCustomMessage)));
+					bsonBuilder.append(bsoncxx::builder::basic::kvp("message", bsoncxx::types::b_string(mCustomMessage)));
 				}
 
 				return bsonBuilder;
@@ -124,11 +124,11 @@ namespace sitara {
 
 			virtual bsoncxx::builder::basic::document getBson() const override {
 				auto bsonBuilder = BaseHit::getBson();
-				bsonBuilder.append(bsoncxx::builder::basic::kvp("category", bsoncxx::types::b_utf8(mCategory)));
-				bsonBuilder.append(bsoncxx::builder::basic::kvp("action", bsoncxx::types::b_utf8(mAction)));
+				bsonBuilder.append(bsoncxx::builder::basic::kvp("category", bsoncxx::types::b_string(mCategory)));
+				bsonBuilder.append(bsoncxx::builder::basic::kvp("action", bsoncxx::types::b_string(mAction)));
 
 				if (!mLabel.empty()) {
-					bsonBuilder.append(bsoncxx::builder::basic::kvp("label", bsoncxx::types::b_utf8(mLabel)));
+					bsonBuilder.append(bsoncxx::builder::basic::kvp("label", bsoncxx::types::b_string(mLabel)));
 				}
 				if (mValue > 0) {
 					bsonBuilder.append(bsoncxx::builder::basic::kvp("value", mValue));
@@ -173,7 +173,7 @@ namespace sitara {
 
 			virtual bsoncxx::builder::basic::document getBson() const override {
 				auto bsonBuilder = BaseHit::getBson();
-				bsonBuilder.append(bsoncxx::builder::basic::kvp("screenName", bsoncxx::types::b_utf8(mScreenName)));
+				bsonBuilder.append(bsoncxx::builder::basic::kvp("screenName", bsoncxx::types::b_string(mScreenName)));
 
 				return bsonBuilder;
 			}
